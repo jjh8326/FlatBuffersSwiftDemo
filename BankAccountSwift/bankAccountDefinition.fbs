@@ -1,0 +1,16 @@
+// Example IDL file
+
+enum status : byte { open, closed, frozen }
+
+table account {
+  account_id: short;
+  balance: float;
+  interest_rate: double;
+  account_status: status;
+}
+
+table account_information {
+  owner: string;
+  platinum_rewards: bool;
+  accounts: [account];
+}
