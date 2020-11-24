@@ -39,11 +39,12 @@ let accountInformationDetails = accountInformation.createaccountInformation(&bui
 //Set the end of the buffer using the accountInformation and finalize buffer
 builder.finish(offset: accountInformationDetails);
 
-//This must be called after `finish()`
-//`sizedByteArray` returns the finished buffer of type [UInt8]
-let buffer = builder.sizedByteArray
-//Make sure the buffer is not empty
+// This must be called after `finish()`.
+// `sizedByteArray` returns the finished buf of type [UInt8].
+let buffer = builder.sizedByteArray;
 assert(!buffer.isEmpty)
+// or you can use to get an object of type Data (binary blob)
+//let bufferData = ByteBuffer(data: builder.data);
 
 accessBuffer(buffer: buffer);
 
@@ -58,6 +59,11 @@ func accessBuffer (buffer: [UInt8]) {
     //Note: Do not force unwrap optionals unless you know the data type, otherwise the program will crash
     let ownerInBuffer: String = accountInformationInBuffer.owner!;
     let platinumRewardInBuffer = accountInformationInBuffer.platinumRewards;
+    
+    //See if this can support NSData (block of binary data or binary blob)
+    //see if there is a constructor in builder or flat buffer for binary data
+    //encryped binary blob -> decrypted -> put binary blob into builder
+    //look at constructors around flat buffer builder or whatever / talk to sam
     
     //Access the accounts stored in account info
     let savingsAccountInBuffer: account = accountInformationInBuffer.accounts(at: 0)!;
